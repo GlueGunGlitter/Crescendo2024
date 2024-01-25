@@ -4,23 +4,16 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
-/** An example command that uses an example subsystem. */
-public class ExampleCommand extends Command {
-  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-  private final ExampleSubsystem m_subsystem;
-
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public ExampleCommand(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+public class InTakeCommand extends Command {
+  /** Creates a new InTakeCommand. */
+  public InTakeCommand() {
+    addRequirements(RobotContainer.m_InTakeSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -31,6 +24,9 @@ public class ExampleCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (RobotContainer.driver.getBButtonPressed()) {
+      RobotContainer.m_InTakeSubsystem.setIntakeMotorSpeed(Robot.intakeMotorSpeed.getDouble(0));
+    }
   }
 
   // Called once the command ends or is interrupted.
